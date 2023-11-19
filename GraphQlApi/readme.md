@@ -269,3 +269,18 @@ http://localhost:31714/swagger/index.html
 ![Alt text](image-2.png)
 
 source : [src](https://medium.com/@jaydeepvpatil225/containerize-the-net-core-7-web-api-with-docker-and-kubernetes-9dd23e392936)
+
+#### Delete deployment
+```bash
+kubectl delete deployment product-app-deployment
+```
+
+#### Delete service
+```bash
+kubectl delete service product-app-service
+```
+
+#### Delete all
+```bash
+kubectl delete all --all
+```
