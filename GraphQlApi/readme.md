@@ -94,6 +94,19 @@ query($productId:UUID!){
 
 ---
 
+##### Docker
+Docker is a platform for developers and sysadmins to build, run, and share applications with containers.
+
+##### Kubernetes
+Kubernetes is an open-source container-orchestration system for automating computer application deployment, scaling, and management.
+Benefits of Kubernetes
+- Service discovery and load balancing : No need to modify your application to use an unfamiliar service discovery mechanism. Kubernetes gives Pods their own IP addresses and a single DNS name for a set of Pods, and can load-balance across them.
+- Storage orchestration : Automatically mount the storage system of your choice, such as local storages, public cloud providers, and more.
+- Automated rollouts and rollbacks: Kubernetes progressively rolls out changes to your application or its configuration, while monitoring application health to ensure it doesn't kill all your instances at the same time. If something goes wrong, Kubernetes will rollback the change for you. Take advantage of a growing ecosystem of deployment solutions.
+- Automatic bin packing : Automatically places containers based on their resource requirements and other constraints, while not sacrificing availability. Mix critical and best-effort workloads in order to drive up utilization and save even more resources.
+- Self-healing : Restarts containers that fail, replaces and reschedules containers when nodes die, kills containers that don't respond to your user-defined health check, and doesn't advertise them to clients until they are ready to serve.
+- Secret and configuration management : Deploy and update secrets and application configuration without rebuilding your image and without exposing secrets in your stack configuration.
+
 The docker file should be in the same folder as the .csproj file of the project
 #### Build docker image
 ```bash
@@ -113,10 +126,12 @@ docker logs web-api-container
 ##### Explanation
 - -d: Run the container in detached mode (in the background)
 - -p: Publish a container’s port(s) to the host
-- 5001:80: Map TCP port 80 in the container to port 5001 on the Docker host
+- 2323:80: Map TCP port 80 in the container to port 2323 on the Docker host
 - — name: Assign a name to the container
 - web-api: Name of the image to run
 - web-api-container: Name of the container
+
+Dummy: Map port 2323 on your local machine to port 80 on the container. You can then browse to http://localhost:2323 to view the app.
 
 
 
@@ -204,7 +219,7 @@ spec:
             - containerPort: 80  # Port to expose within the pod
 ```
 
-Service.YAML
+Service.yml
 
 ```yml
 apiVersion: v1
@@ -252,3 +267,5 @@ kubectl logs product-app-deployment-5549b5749c-lchl2
 ##### Launch the app
 http://localhost:31714/swagger/index.html
 ![Alt text](image-2.png)
+
+source : [src](https://medium.com/@jaydeepvpatil225/containerize-the-net-core-7-web-api-with-docker-and-kubernetes-9dd23e392936)
