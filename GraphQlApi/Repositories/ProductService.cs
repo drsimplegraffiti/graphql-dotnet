@@ -18,6 +18,8 @@ namespace GraphQlApi.Repositories
         public async Task<List<ProductDetails>> ProductListAsync()
         {
             return await dbContextClass.Products.ToListAsync();
+            // return Task.FromResult(dbContextClass.Products.ToList()); // thi is how to use Task with synchronous method
+
         }
         public async Task<ProductDetails?> GetProductDetailByIdAsync(Guid productId)
         {
