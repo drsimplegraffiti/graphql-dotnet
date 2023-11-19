@@ -78,5 +78,26 @@ namespace GraphQlApi.Repositories
         {
             return dbContextClass.Products.Any(e => e.Id == productId);
         }
+
+        public Task GetAllUsingTask()
+        {
+            // return Task.FromResult(dbContextClass.Products.ToList());
+            var tasks = dbContextClass.Products.ToListAsync();
+            return Task.FromResult(tasks);
+        }
+
+        public Task CreateUsingTask(ProductDetails productDetails)
+        {
+             dbContextClass.Products.AddAsync(productDetails);
+            var result = dbContextClass.SaveChangesAsync();
+            if (result.IsCompletedSuccessfully)
+            {
+                return Task.CompletedTask;
+            }
+            else
+            {
+                return Task.FromException(new Exception("Error in saving data"));
+            }
+        }
     }
 }

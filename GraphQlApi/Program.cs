@@ -41,4 +41,8 @@ if (app.Environment.IsDevelopment())
 //GraphQL
 app.MapGraphQL();
 app.UseHttpsRedirection();
+
+//REST API
+app.MapControllers();
+
 app.Run();

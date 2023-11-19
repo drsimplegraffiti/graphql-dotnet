@@ -13,5 +13,9 @@ namespace GraphQlApi.Repositories
         public Task<bool> AddProductAsync(ProductDetails productDetails);
         public Task<bool> UpdateProductAsync(ProductDetails productDetails);
         public Task<bool> DeleteProductAsync(Guid productId);
+
+        public Task GetAllUsingTask();
+
+        public Task CreateUsingTask(ProductDetails productDetails);
     }
 }
