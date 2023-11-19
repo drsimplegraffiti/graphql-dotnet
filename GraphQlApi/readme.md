@@ -284,3 +284,33 @@ kubectl delete service product-app-service
 ```bash
 kubectl delete all --all
 ```
+
+##### Explanation 
+- kubectl apply -f deployment.yml: This command will create a deployment with the name product-app-deployment and will create 3 replicas of the pod.
+- kubectl apply -f service.yml: This command will create a service with the name product-app-service and will expose the port 80 of the pod to the port 31714 of the host machine.
+- kubectl get pods: This command will list all the pods running in the cluster.
+- kubectl get deployments: This command will list all the deployments running in the cluster.
+- kubectl get services: This command will list all the services running in the cluster.
+- kubectl logs product-app-deployment-5549b5749c-lchl2: This command will print the logs of the pod with the name product-app-deployment-5549b5749c-lchl2.
+
+apiVersion: Specifies the API version of the Service resource.
+
+· kind: Specifies the type of object, like service and deployment.
+
+· metadata: Contains the metadata of the service, including its name.
+
+· spec: Describes the desired state of the service.
+
+· selector: Defines a label selector that selects the fruit to be displayed by the service.
+
+· ports: Specifies how traffic is routed to pods.
+
+· protocol: Specifies the network protocol, like TCP and UDP.
+
+· port: The port on which the service listens.
+
+· targetPort: The port on which the pods selected by the selector listen.
+
+· type: Specifies the type of service to be performed. The most common types are:
+
+· NodePort: Displays the service on a particular port to all nodes.
