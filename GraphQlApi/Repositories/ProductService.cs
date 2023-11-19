@@ -99,5 +99,12 @@ namespace GraphQlApi.Repositories
                 return Task.FromException(new Exception("Error in saving data"));
             }
         }
+
+        public async Task<List<ProductDetails>> GetAllProducts()
+        {
+            return await dbContextClass.Products.ToListAsync();
+        }
+
+        
     }
 }

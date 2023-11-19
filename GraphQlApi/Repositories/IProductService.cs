@@ -17,5 +17,7 @@ namespace GraphQlApi.Repositories
         public Task GetAllUsingTask();
 
         public Task CreateUsingTask(ProductDetails productDetails);
+
+        Task<List<ProductDetails>> GetAllProducts();
     }
 }
