@@ -19,12 +19,22 @@ namespace GraphQlApi.Controllers
             this.productService = productService;
         }
 
+        /// <summary>
+        /// Get All Products using Task
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAllUsingTask()
         {
             return Ok(await productService.ProductListAsync());
         }
 
+
+        /// <summary>
+        /// Create Product using Task
+        /// </summary>
+        /// <param name="productDetails"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CreateUsingTask([FromBody] ProductDetails productDetails)
         {

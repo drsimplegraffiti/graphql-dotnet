@@ -24,6 +24,12 @@ namespace GraphQlApi.Controllers
             return Ok(products);
         }
 
+
+        /// <summary>
+        /// Get Product By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}", Name = "GetProductById")]
         public async Task<IActionResult> GetProductById(Guid id)
         {
