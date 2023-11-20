@@ -42,7 +42,9 @@ namespace GraphQlApi.Controllers
         public String DailyOffers()
         {
             //Recurring Job - this job is executed many times on the specified cron schedule
-            RecurringJob.AddOrUpdate(() => Console.WriteLine("Sent similar product offer and suuggestions"), Cron.Minutely);
+            // RecurringJob.AddOrUpdate(() => Console.WriteLine("Sent similar product offer and suuggestions"), Cron.Daily); // Obsolete method
+
+            RecurringJob.AddOrUpdate("jobId", () => Console.WriteLine("Sent similar product offer and suggestions"), Cron.Minutely);
             return "offer sent!";
         }
     }
