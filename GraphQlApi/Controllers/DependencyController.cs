@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using GraphQlApi.Enitities;
+using GraphQlApi.Exceptions;
 using GraphQlApi.Repositories;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GraphQlApi.Controllers
@@ -36,6 +39,10 @@ namespace GraphQlApi.Controllers
             var services = this.HttpContext.RequestServices;
             var productService = (IProductService)services.GetService(typeof(IProductService))!;
             var product = await productService.GetProductDetailByIdAsync(id);
+            if(product == null)
+            {
+                throw new NotFoundException($"Product with id {id} not found", new Exception(), 4);
+            }
 
             return Ok(product);
         }

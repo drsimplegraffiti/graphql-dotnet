@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using GraphQlApi.Data;
 using GraphQlApi.Enitities;
+using GraphQlApi.Exceptions;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace GraphQlApi.Repositories
@@ -76,7 +78,17 @@ namespace GraphQlApi.Repositories
         }
         private bool ProductDetailsExists(Guid productId)
         {
-            return dbContextClass.Products.Any(e => e.Id == productId);
+            // if(productId == null){
+            //     throw new NotFoundException("Product Id is null", new Exception(), 404);
+            // }
+            // return dbContextClass.Products.Any(e => e.Id == productId);
+            var product = dbContextClass.Products.Where(_ => _.Id == productId).FirstOrDefault();
+            if (product == null)
+            {
+                throw new NotFoundException("Product Id is null", new Exception(), 404);
+            }
+
+            return true;
         }
 
         public Task GetAllUsingTask()

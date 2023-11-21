@@ -314,3 +314,42 @@ apiVersion: Specifies the API version of the Service resource.
 · type: Specifies the type of service to be performed. The most common types are:
 
 · NodePort: Displays the service on a particular port to all nodes.
+
+
+---
+
+
+##### Dbcontext another way
+```csharp
+
+    public class DbContextClass : DbContext
+    {
+        protected readonly IConfiguration Configuration;
+        public DbContextClass(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+        }
+        public DbSet<Product> Products { get; set; }
+    }
+```
+
+Then in Program.cs
+```csharp
+//...
+builder.Services.AddDbContext<DbContextClass>();
+```
+
+
+Returning Entity
+```csharp
+public async Task<Product> AddProduct(Product product)
+        {
+            var result = _dbContext.Products.Add(product);
+            await _dbContext.SaveChangesAsync();
+            return result.Entity; // Entity is the product, i.e result.Entity == product
+        }
+```

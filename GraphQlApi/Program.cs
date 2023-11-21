@@ -2,6 +2,7 @@ using GraphQlApi.Data;
 using GraphQlApi.GraphQL.Mutations;
 using GraphQlApi.GraphQL.Types;
 using GraphQlApi.Repositories;
+using GraphQlApi.Utility;
 using Hangfire;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Register Servic
 builder.Services.AddScoped<IProductService, ProductService>();
+
 //InMemory Database
 // builder.Services.AddDbContext<DbContextClass>(o => o.UseInMemoryDatabase("GraphQLDemo"));
 //SQL Server Database
@@ -50,6 +52,10 @@ using (var scope = app.Services.CreateScope())
 
 //GraphQL
 app.MapGraphQL();
+
+//Global Error Handling
+app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
+
 
 //REST API
 
